@@ -61,3 +61,52 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 89ms (Views: 76.0ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-03-14 23:20:57 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 274ms (Views: 256.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/hello" for 127.0.0.1 at 2017-03-14 23:21:00 -0300
+Processing by ApplicationController#hello as HTML
+  Rendering html template
+  Rendered html template (0.1ms)
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/hello" for 127.0.0.1 at 2017-03-14 23:21:00 -0300
+Processing by ApplicationController#hello as HTML
+  Rendering html template
+  Rendered html template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-03-14 23:21:05 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 93ms (Views: 80.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/goodbye" for 127.0.0.1 at 2017-03-14 23:21:07 -0300
+Processing by ApplicationController#goodbye as HTML
+  Rendering html template
+  Rendered html template (0.0ms)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/goodbye" for 127.0.0.1 at 2017-03-14 23:21:07 -0300
+Processing by ApplicationController#goodbye as HTML
+  Rendering html template
+  Rendered html template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-03-14 23:21:11 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 116ms (Views: 96.8ms | ActiveRecord: 0.0ms)
+
+
