@@ -1,0 +1,213 @@
+<div class="head">
+  <h2>8.1.1: What is the difference between GET login_path and POST login_path?</h2>
+</div>
+
+<div class="response">
+  <p>The difference is in the http method, GET login_path is used to request
+    the login HTML and POST login_path is used to send the data required to login</p>
+</div>
+
+<div class="head">
+  <h2>8.1.2: By piping the results of rails routes to grep, list all the routes
+    associated with the Users resource. Do the same for Sessions. How many routes does each resource have?</h2>
+</div>
+
+<div class="coding">
+  <p>$ rails routes | grep user</p>
+  <span class="indentation-1">signup GET    /signup(.:format)         users#new</span></br>
+  <span class="indentation-3"/>POST   /signup(.:format)         users#create</span></br>
+  <span class="indentation-1"/>users GET    /users(.:format)          users#index</span></br>
+  <span class="indentation-3"/>POST   /users(.:format)          users#create</span></br>
+  <span class="indentation-1"/>new_user GET    /users/new(.:format)      users#new</span></br>
+  <span class="indentation-1"/>edit_user GET    /users/:id/edit(.:format) users#edit</span></br>
+  <span class="indentation-1"/>user GET    /users/:id(.:format)      users#show</span></br>
+  <span class="indentation-3"/>PATCH  /users/:id(.:format)      users#update</span></br>
+  <span class="indentation-3"/>PUT    /users/:id(.:format)      users#update</span></br>
+  <span class="indentation-3"/>DELETE /users/:id(.:format)      users#destroy</span></br>
+  <p>$ rails routes | grep sessions</p>
+  <span class="indentation-1">login GET    /login(.:format)          sessions#new</span></br>
+  <span class="indentation-3">POST   /login(.:format)          sessions#create</span></br>
+  <span class="indentation-1">logout DELETE /logout(.:format)         sessions#destroy</span></br>
+</div>
+
+<div class="response">
+  <p>users have 10 routes and sessions have 3 routes</p>
+</div>
+
+<div class="head">
+  <h2>8.2: Submissions from the form defined in Listing 8.4 will be routed to the Session controller’s create action.
+           How does Rails know to do this?</h2>
+</div>
+
+<div class="response">
+  <p>In route file is defined that /login (login_path) points to sessions#create for POST method</p>
+</div>
+
+<div class="head">
+  <h2>8.3: Using the Rails console, confirm each of the values in Table 8.2.
+           Start with user = nil, and then use user = User.first</h2>
+</div>
+
+<div class="coding">
+  <p>2.4.0 :001 > user = nil</p>
+  <p> => nil</p>
+  <p>2.4.0 :002 > user && user.authenticate('123456')</p>
+  <p> => nil</p>
+  <p>2.4.0 :003 > user = User.first</p>
+  <p>
+    User Load (0.5ms)  SELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+ => #<User id: 1, name: "Jefferson Henrique Ramos", email: "jeff.hen0811@gmail.com", created_at: "2017-05-02 19:11:57", updated_at: "2017-05-02 19:11:57", password_digest: "$2a$10$JdBbVibjbkFM8w4a0QZgTOJ2ge3eEWGSakUy6USqf41...">
+  </p>
+  <p>2.4.0 :004 > user && user.authenticate('12345678')</p>
+  <p> => false</p>
+  <p>2.4.0 :005 > user && user.authenticate('123456')</p>
+  <p> => #<User id: 1, name: "Jefferson Henrique Ramos", email: "jeff.hen0811@gmail.com", created_at: "2017-05-02 19:11:57", updated_at: "2017-05-02 19:11:57", password_digest: "$2a$10$JdBbVibjbkFM8w4a0QZgTOJ2ge3eEWGSakUy6USqf41..."></p>
+</div>
+
+<div class="response">
+  <p>Confirm</p>
+</div>
+
+<div class="head">
+  <h2>8.4: Verify in your browser that the sequence from Section 8.1.4 works correctly, i.e., that the flash message disappears when you click on a second page.</h2>
+</div>
+
+<div class="response">
+  <p>Confirm</p>
+</div>
+
+<div class="head">
+  <h2>8.6.1: Confirm at the console that User.find_by(id: ...) returns nil when the corresponding user doesn’t exist.</h2>
+</div>
+
+<div class="coding">
+  <p>2.4.0 :001 > User.find_by id: 2</p>
+  <p>
+    User Load (0.5ms)  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 2], ["LIMIT", 1]]
+    => nil
+  </p>
+</div>
+
+<div class="response">
+  <p>Confirm</p>
+</div>
+
+<div class="head">
+  <h2>8.6.2: In a Rails console, create a session hash with key :user_id. By following the steps in Listing 8.17, confirm that the ||= operator works as required.</h2>
+</div>
+
+<div class="coding">
+  <p>2.4.0 :002 > session = {}</p>
+  <p> => {}</p>
+  <p>2.4.0 :003 > session[:user_id] = nil</p>
+  <p> => nil</p>
+  <p>2.4.0 :004 > @current_user ||= User.find_by(id: session[:user_id])</p>
+  <p>
+    User Load (1.2ms)  SELECT  "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?  [["LIMIT", 1]]
+    => nil
+  </p>
+  <p>2.4.0 :005 > session[:user_id]= User.first.id</p>
+  <p>
+    User Load (0.7ms)  SELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+    => 1
+  </p>
+  <p>2.4.0 :006 > @current_user ||= User.find_by(id: session[:user_id])</p>
+  <p>
+    User Load (1.3ms)  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]</br>
+    => # User id: 1, name: "Jefferson Henrique Ramos", email: "jeff.hen0811@gmail.com", created_at: "2017-05-02 19:11:57", updated_at: "2017-05-02 19:11:57", password_digest: "$2a$10$JdBbVibjbkFM8w4a0QZgTOJ2ge3eEWGSakUy6USqf41...">
+  </p>
+  <p>2.4.0 :007 > @current_user ||= User.find_by(id: session[:user_id])</p>
+  <p>
+    => # User id: 1, name: "Jefferson Henrique Ramos", email: "jeff.hen0811@gmail.com", created_at: "2017-05-02 19:11:57", updated_at: "2017-05-02 19:11:57", password_digest: "$2a$10$JdBbVibjbkFM8w4a0QZgTOJ2ge3eEWGSakUy6USqf41...">
+  </p>
+</div>
+
+<div class="response">
+  <p>confirmed that ||= operator works as required</p>
+</div>
+
+<div class="head">
+  <h2>8.7.1: Using the cookie inspector in your browser (Section 8.2.1.1), remove the session cookie and confirm that the layout links revert to the non-logged-in state.</h2>
+</div>
+
+<div class="response">
+  <p>confirmed</p>
+</div>
+
+<div class="head">
+  <h2>8.7.2: Log in again, confirming that the layout links change correctly. Then quit your browser and start it again to confirm that the layout links revert to the non-logged-in state. (If your browser has a “remember where I left off” feature that automatically restores the session, be sure to disable it in this step (Box 1.1).)</h2>
+</div>
+
+<div class="response">
+  <p>confirmed</p>
+</div>
+
+<div class="head">
+  <h2>8.8.1: Delete the bang ! in the Session helper’s logged_in? method and confirm that the test in Listing 8.23 is red.</h2>
+</div>
+
+<div class="coding">
+  <p>
+    // SessionsHelper</br>
+    def logged_in?</br>
+    <span class="indentation-1">current_user.nil?</span></br>
+    end
+  </p>
+  <p>
+    FAIL["test_login_with_valid_information_followed_by_logout", UsersLoginTest, 2.3143746979985735]</br>
+    test_login_with_valid_information_followed_by_logout#UsersLoginTest (2.31s)
+        Expected exactly 0 elements matching "a[href="/login"]", found 1..
+        Expected: 0
+          Actual: 1
+        test/integration/users_login_test.rb:17:in `block in class:UsersLoginTest>'
+  </p>
+</div>
+
+<div class="head">
+  <h2>8.8.2: Restore the ! to get back to green</h2>
+</div>
+
+<div class="coding">
+  <p>
+    // SessionsHelper</br>
+    def logged_in?</br>
+    <span class="indentation-1">!current_user.nil?</span></br>
+    end
+  </p>
+  <p>
+    Finished in 1.45462s</br>
+    2 tests, 16 assertions, 0 failures, 0 errors, 0 skips
+  </p>
+</div>
+
+<div class="head">
+  <h2>8.9.1: Is the test suite red or green if you comment out the log_in line in Listing 8.25?</h2>
+</div>
+
+<div class="response">
+  <p>Is the test suite red</p>
+</div>
+
+<div class="head">
+  <h2>8.9.2: By using your text editor’s ability to comment out code, toggle back and forth between commenting out code in Listing 8.25 and confirm that the test suite toggles between red and green. (You will need to save the file between toggles.)</h2>
+</div>
+
+<div class="response">
+  <p>Confirmed</p>
+</div>
+
+<div class="head">
+  <h2>8.10.1: Confirm in a browser that the “Log out” link causes the correct changes in the site layout. What is the correspondence between these changes and the final three steps in Listing 8.31?</h2>
+</div>
+
+<div class="response">
+  <p>Confirmed</p>
+</div>
+
+<div class="head">
+  <h2>8.10.2: By checking the site cookies, confirm that the session is correctly removed after logging out.</h2>
+</div>
+
+<div class="response">
+  <p>Checked, Cookie session has not been removed just chenged</p>
+</div>
