@@ -532,3 +532,31 @@ Processing by ExercisesController#basic_login as HTML
 Completed 200 OK in 74ms (Views: 67.2ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-05-09 16:00:45 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 1299ms (Views: 1266.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-09 16:01:21 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 122ms (Views: 83.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-09 16:01:33 -0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 81ms (Views: 73.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/exercises-9-advanced_login" for 127.0.0.1 at 2017-05-09 16:01:35 -0300
+Processing by ExercisesController#advanced_login as HTML
+  Rendering exercises/advanced_login.html.erb within layouts/application
+  Rendered exercises/advanced_login.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 79ms (Views: 71.2ms | ActiveRecord: 0.0ms)
+
+

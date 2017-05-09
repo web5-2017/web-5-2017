@@ -1,0 +1,81 @@
+<div class="head">
+  <h2>9.1.1: In the console, assign user to the first user in the database, and verify by calling it directly that the remember method works. How do remember_token and remember_digest compare?</h2>
+</div>
+
+<div class="coding">
+  <pre>
+    2.4.0 :001 > user = User.first
+      User Load (0.9ms)  SELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+     => #<User id: 1, name: "Jefferson Henrique Ramos", email: "jeff.hen0811@gmail.com", created_at: "2017-05-02 19:11:57", updated_at: "2017-05-02 19:11:57", password_digest: "$2a$10$JdBbVibjbkFM8w4a0QZgTOJ2ge3eEWGSakUy6USqf41...", remember_digest: nil>
+    2.4.0 :002 > user.remember
+       (0.1ms)  begin transaction
+      SQL (24.8ms)  UPDATE "users" SET "updated_at" = ?, "remember_digest" = ? WHERE "users"."id" = ?  [["updated_at", 2017-05-09 18:21:38 UTC], ["remember_digest", "$2a$10$19CGGovZFIbs.kYtfSF1fuJ.iT69.7i9mrd90YY1upAh7i.CvTjxW"], ["id", 1]]
+       (350.5ms)  commit transaction
+     => true
+    2.4.0 :003 > user.remember_token
+     => "56SdOHSSRltJI3_pE0JfkA"
+    2.4.0 :004 > user.remember_digest
+     => "$2a$10$19CGGovZFIbs.kYtfSF1fuJ.iT69.7i9mrd90YY1upAh7i.CvTjxW"
+    2.4.0 :005 >
+  </pre>
+</div>
+
+<div class="head">
+  <h2>9.2.2: At the console, verify directly that the authenticated? method defined in Listing 9.6 works correctly.</h2>
+</div>
+
+<div class="response">
+  <p>Yes, in the console the method works</p>
+</div>
+
+<div class="head">
+  <h2>9.3.1: Comment out the fix in Listing 9.16 and then verify that the first subtle bug is present by opening two logged-in tabs, logging out in one, and then clicking “Log out” link in the other.</h2>
+</div>
+
+<div class="response">
+  <p>OK</p>
+</div>
+
+<div class="head">
+  <h2>9.3.2: Comment out the fix in Listing 9.19 and verify that the second subtle bug is present by logging out in one browser and closing and opening the second browser.</h2>
+</div>
+
+<div class="response">
+  <p>OK</p>
+</div>
+
+<div class="head">
+  <h2>9.3.3: Uncomment the fixes and confirm that the test suite goes from red to green.</h2>
+</div>
+
+<div class="response">
+  <p>OK</p>
+</div>
+
+<div class="head">
+  <h2>9.4.1: At the console, invent examples showing both possible behaviors of the ternary operator (Box 9.2).</h2>
+</div>
+
+<div class="coding">
+  <pre>
+    2.4.0 :006 > test = user.authenticated?(user.remember_token) ? "aaaa" : "bbbb"
+     => "aaaa"
+    2.4.0 :007 > test = user.authenticated?(user.remember_token) ? "cccc" : "bbbb"
+     => "cccc"
+    2.4.0 :008 > def test
+    2.4.0 :009?>   user.authenticated?(user.remember_token) ? "aaaa" : "bbbb"
+    2.4.0 :010?>   end
+     => :test
+    2.4.0 :011 > test
+     => "cccc"
+    2.4.0 :012 >
+  </pre>
+</div>
+
+<div class="head">
+  <h2>Verify by removing the authenticated? expression in Listing 9.33 that the second test in Listing 9.31 fails, thereby confirming that it tests the right thing.</h2>
+</div>
+
+<div class="response">
+  <p>OK</p>
+</div>
